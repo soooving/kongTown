@@ -1,35 +1,38 @@
 // src/main/frontend/src/App.js
-import { Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import React from 'react';
 
 import Header from "./com/layout/header";
 import Sidebar from "./com/layout/sidebar";
-import Main from "./com/main/main";
-import ProductManage from "./com/manage/productManage";
+
+import Main from "./main/main";
+import Product from "./manage/product";
 
 function App() {
 
   return (
       <>
         <Header />
-        <Sidebar />
 
-        <Routes>
-            <Route path="/" exact element={<Main />} />
-            <Route path="/user/login" element={<ProductManage />} />
+          <div className={"content"}>
+              <Sidebar />
+              <Routes>
+                  <Route path="/" exact element={<Main />} />
+                  <Route path="/user/login" element={<Product />} />
 
-            <Route path="/manage/firm" element={<ProductManage />} />
-            <Route path="/manage/firm/admin" element={<ProductManage />} />
+                  <Route path="/manage/firm" element={<Product />} />
+                  <Route path="/manage/firm/admin" element={<Product />} />
 
-            <Route path="/manage/firm/user" element={<ProductManage />} />
-            <Route path="/manage/product" element={<ProductManage />} />
-            <Route path="/product/signup" element={<ProductManage />} />
+                  <Route path="/manage/firm/user" element={<Product />} />
+                  <Route path="/manage/product" element={<Product />} />
+                  <Route path="/product/signup" element={<Product />} />
 
-            <Route path="/product/rental" element={<ProductManage />} />
-            <Route path="/product/return" element={<ProductManage />} />
+                  <Route path="/product/rental" element={<Product />} />
+                  <Route path="/product/return" element={<Product />} />
 
-            <Route exact element={<Main />} />
-        </Routes>
+                  <Route exact element={<Main />} />
+              </Routes>
+          </div>
       </>
   );
 }

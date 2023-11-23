@@ -1,0 +1,12 @@
+div#root { position: relative; width: 100%; height: 100vh; }
+
+div.header { position: relative; display: flex; justify-content: space-between; align-items: center; width: 100%; height: 90px; padding: 10px 30px; border-bottom: 1px solid #B4E7A7; }
+div.header img { position: relative; width: 80px; margin-left: 20px; }
+div.header ul { position: relative; }
+
+div.content { position: relative; display: flex; width: 100%; height: calc(100vh - 90px); }
+div.content ul.sidebar { position: relative; width: 250px; height: 100%; padding: 20px 25px; border-right: 1px solid #B4E7A7; }
+div.content ul.sidebar li { padding: 3px 0px; }
+div.content ul.sidebar li::before { display: inline-block; background: url("../images/menu-icon.png") no-repeat; background-size: 12px; width: 12px; height: 12px; vertical-align: middle; margin-right: 20px; content: ''; }
+
+div.content div { position: relative; padding: 20px 25px; }
