@@ -7,6 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 
 import './com/css/reset.css'
 import './com/css/common.css'
+import './com/css/content.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -7,6 +7,7 @@ import Sidebar from "./com/layout/sidebar";
 
 import Main from "./main/main";
 import Product from "./manage/product";
+import ProductDtl from "./manage/productDtl";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
 
                   <Route path="/manage/firm/user" element={<Product />} />
                   <Route path="/manage/product" element={<Product />} />
+                  <Route path="/manage/product/detail/:itemCode?" element={<ProductDtl />} />
                   <Route path="/product/signup" element={<Product />} />
 
                   <Route path="/product/rental" element={<Product />} />

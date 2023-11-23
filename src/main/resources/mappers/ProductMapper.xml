@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sb.kongtown.mapper.ProductMapper">
+
+    <select id="productList" resultType="java.util.HashMap">
+        SELECT
+            row_number() over(order by item_code) as num
+             , item_code AS itemCode
+             , item_name AS itemName
+             , item_number AS itemNumber
+             , have_number AS haveNumber
+             , use_yn AS useYn
+        FROM RENTAL_ITEM
+    </select>
+
+    <select id="productSelect" resultType="java.util.HashMap">
+        SELECT
+             item_name AS itemName
+             , item_number AS itemNumber
+             , use_yn AS useYn
+        FROM RENTAL_ITEM
+        WHERE item_code = ${itemCode}
+    </select>
+
+    <insert id="productInsert" parameterType="hashmap">
+        <selectKey resultType="string" keyProperty="itemCode" order="BEFORE">
+            SELECT NVL(MAX(CAST(item_code AS UNSIGNED))+1, '1000000001') FROM RENTAL_ITEM
+        </selectKey>
+
+        INSERT INTO RENTAL_ITEM (
+            item_code
+            , item_name
+            , item_number
+            , have_number
+            , user_id
+            , memo
+            , use_yn
+            , reg_id
+            , reg_date
+        )
+        VALUES (
+            #{itemCode}
+           , #{itemName}
+           , #{itemNumber}
+           , #{itemNumber}
+           , #{userId}
+           , #{memo}
+           , #{useYn}
+           , #{regId}
+           , NOW()
+        )
+    </insert>
+
+    <update id="productUpdate">
+        UPDATE RENTAL_ITEM
+        SET item_name = #{itemName}
+          , item_number = #{itemNumber}
+          , use_yn = #{useYn}
+          , mod_id = #{regId}
+          , mod_date = NOW()
+
+        WHERE item_code =  #{itemCode}
+    </update>
+
+</mapper>

@@ -10,3 +10,17 @@ div.content ul.sidebar li { padding: 3px 0px; }
 div.content ul.sidebar li::before { display: inline-block; background: url("../images/menu-icon.png") no-repeat; background-size: 12px; width: 12px; height: 12px; vertical-align: middle; margin-right: 20px; content: ''; }
 
 div.content div { position: relative; padding: 20px 25px; }
+
+div.title-area-h4 { position: relative; display: flex; justify-content: space-between; align-items: center; }
+div.title-area-h4 h4 { font-size: 30px; font-weight: bold; }
+div.title-area-h4 h4::before { display: inline-block; background: url("../images/title-icon.png") no-repeat; background-size: 40px; width: 40px; height: 40px; vertical-align: middle; margin-right: 20px; content: ''; }
+div.title-area-h4 a.btn-add { width: 100px; padding: 8px; text-align: center; border-radius: 10px; background-color: #64B74E; color: white; }
+
+div.button-area { width: 100%; text-align: center; }
+div.button-area button { width: 100px; padding: 8px; text-align: center; border-radius: 10px; background-color: #64B74E; color: white; }
+div.button-area button:not(:first-child) { margin-left: 20px; }
+
+
+/* input */
+input.input-text { width: 80%; padding: 5px; border-radius: 10px; border: 1px solid #64B74E; }
+input.input-radio+span { margin-right: 20px; }
