@@ -3,6 +3,7 @@ package com.sb.kongtown.service;
 import com.sb.kongtown.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,5 +25,16 @@ public class ProductService {
         if(param.get("itemCode") != "")
             return productMapper.productUpdate(param);
         return productMapper.productInsert(param);
+    }
+
+    public List<HashMap<String, Object>> productRentalList(HashMap<String, Object> param) {
+        return productMapper.productRentalList(param);
+    }
+
+    @Transactional
+    public int productRental(HashMap<String, Object> param) {
+        // res += productMapper.productHaveNumberUpdate(param);
+
+        return productMapper.productRental(param);
     }
 }

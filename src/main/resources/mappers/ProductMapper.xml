@@ -14,7 +14,6 @@
              , use_yn AS useYn
         FROM RENTAL_ITEM
     </select>
-
     <select id="productSelect" resultType="java.util.HashMap">
         SELECT
              item_name AS itemName
@@ -23,7 +22,6 @@
         FROM RENTAL_ITEM
         WHERE item_code = ${itemCode}
     </select>
-
     <insert id="productInsert" parameterType="hashmap">
         <selectKey resultType="string" keyProperty="itemCode" order="BEFORE">
             SELECT NVL(MAX(CAST(item_code AS UNSIGNED))+1, '1000000001') FROM RENTAL_ITEM
@@ -52,7 +50,6 @@
            , NOW()
         )
     </insert>
-
     <update id="productUpdate">
         UPDATE RENTAL_ITEM
         SET item_name = #{itemName}
@@ -64,4 +61,62 @@
         WHERE item_code =  #{itemCode}
     </update>
 
+
+    <select id="productRentalList" resultType="java.util.HashMap">
+        SELECT
+            row_number() over(order by I.item_code) as num
+             , I.item_code AS itemCode
+             , I.item_name AS itemName
+             , I.item_number AS itemNumber
+             , I.have_number AS haveNumber
+             , I.use_yn AS useYn
+             , L.rt_state AS state
+        FROM RENTAL_ITEM I
+        LEFT JOIN RENTAL_LOG L ON I.item_code = L.item_code
+                              AND L.user_id = #{userId}
+    </select>
+    <insert id="productRental" parameterType="hashmap">
+        <selectKey resultType="string" keyProperty="rtCode" order="BEFORE">
+            SELECT NVL(MAX(CAST(item_code AS UNSIGNED))+1, 'R000000001') FROM RENTAL_LOG
+        </selectKey>
+
+        INSERT INTO RENTAL_LOG (
+            rt_code
+            , item_code
+            , user_id
+            , rt_state
+            , rt_number
+            , borrow_date
+            , return_date
+            , rt_days
+            , return_yn
+            , reg_id
+            , reg_date
+        )
+        VALUES (
+            #{rtCode}
+            , #{itemCode}
+            , #{userId}
+            , #{rtState}
+            , #{rtNumber}
+            , #{borrowDate}
+            , #{returnDate}
+            , #{rtDays}
+            , #{returnYn}
+            , #{regId}
+            , NOW()
+        )
+    </insert>
+    <update id="productHaveNumberUpdate">
+        <selectKey resultType="string" keyProperty="haveNumber" order="BEFORE">
+            SELECT CAST(have_number AS UNSIGNED)-1 AS haveNumber FROM RENTAL_ITEM WHERE item_code =  #{itemCode}
+        </selectKey>
+
+        UPDATE RENTAL_ITEM
+        SET have_number = #{haveNumber}
+          , mod_id = #{regId}
+          , mod_date = NOW()
+
+        WHERE item_code =  #{itemCode}
+    </update>
 </mapper>

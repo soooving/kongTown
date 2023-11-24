@@ -17,6 +17,7 @@ div.title-area-h4 h4::before { display: inline-block; background: url("../images
 div.title-area-h4 a.btn-add { width: 100px; padding: 8px; text-align: center; border-radius: 10px; background-color: #64B74E; color: white; }
 
 div.button-area { width: 100%; text-align: center; }
+div.button-area-td { width: 100%; text-align: center; padding: 0 !important; }
 div.button-area button { width: 100px; padding: 8px; text-align: center; border-radius: 10px; background-color: #64B74E; color: white; }
 div.button-area button:not(:first-child) { margin-left: 20px; }
 
@@ -24,3 +25,7 @@ div.button-area button:not(:first-child) { margin-left: 20px; }
 /* input */
 input.input-text { width: 80%; padding: 5px; border-radius: 10px; border: 1px solid #64B74E; }
 input.input-radio+span { margin-right: 20px; }
+
+
+/* color */
+span.text-red { color: red; }

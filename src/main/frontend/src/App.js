@@ -8,6 +8,9 @@ import Sidebar from "./com/layout/sidebar";
 import Main from "./main/main";
 import Product from "./manage/product";
 import ProductDtl from "./manage/productDtl";
+import Signup from "./product/signup"
+import Rental from "./product/rental"
+import ReturnR from "./product/return"
 
 function App() {
 
@@ -27,10 +30,10 @@ function App() {
                   <Route path="/manage/firm/user" element={<Product />} />
                   <Route path="/manage/product" element={<Product />} />
                   <Route path="/manage/product/detail/:itemCode?" element={<ProductDtl />} />
-                  <Route path="/product/signup" element={<Product />} />
+                  <Route path="/product/signup" element={<Signup />} />
 
-                  <Route path="/product/rental" element={<Product />} />
-                  <Route path="/product/return" element={<Product />} />
+                  <Route path="/product/rental" element={<Rental />} />
+                  <Route path="/product/return" element={<ReturnR />} />
 
                   <Route exact element={<Main />} />
               </Routes>

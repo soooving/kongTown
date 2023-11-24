@@ -9,8 +9,15 @@ import java.util.List;
 public interface ProductMapper {
 
     public List<HashMap<String, Object>> productList();
-    HashMap<String, Object> productSelect(HashMap<String, Object> param);
+    public HashMap<String, Object> productSelect(HashMap<String, Object> param);
     public int productInsert(HashMap<String, Object> param);
     public int productUpdate(HashMap<String, Object> param);
 
+
+    public List<HashMap<String, Object>> productRentalList(HashMap<String, Object> param);
+    public int productRental(HashMap<String, Object> param);
+
+
+
+    public int productHaveNumberUpdate(HashMap<String, Object> param);
 }

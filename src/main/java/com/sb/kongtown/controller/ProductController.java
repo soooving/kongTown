@@ -29,4 +29,21 @@ public class ProductController {
 
         return productService.productSave(param);
     }
+
+    @PostMapping("/api/product/rental/list")
+    public List<HashMap<String, Object>> productRentalList() {
+        /* toDo :: session 적용 후 수정 필요 */
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", "test");
+
+        return productService.productRentalList(param);
+    }
+
+    @PostMapping("/api/product/rental")
+    public int productRental(@RequestBody HashMap<String, Object> param) {
+        /* toDo :: session 적용 후 수정 필요 */
+        param.put("userId", "test");
+
+        return productService.productRental(param);
+    }
 }
