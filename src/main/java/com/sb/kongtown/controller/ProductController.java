@@ -46,4 +46,21 @@ public class ProductController {
 
         return productService.productRental(param);
     }
+
+    @PostMapping("/api/product/signup/list")
+    public List<HashMap<String, Object>> productSignupList() {
+        /* toDo :: session 적용 후 수정 필요 */
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("userId", "test");
+
+        return productService.productSignupList(param);
+    }
+
+    @PostMapping("/api/product/signup")
+    public int productSignup(@RequestBody HashMap<String, Object> param) {
+        /* toDo :: session 적용 후 수정 필요 */
+        param.put("userId", "test");
+
+        return productService.productSignup(param);
+    }
 }

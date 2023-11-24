@@ -21,6 +21,14 @@ class productService {
     rentalProduct(param) {
         return axios.post('/api/product/rental', param);
     }
+    /* signup list */
+    getProductSignupList() {
+        return axios.post('/api/product/signup/list');
+    }
+    /* signup save */
+    signupProduct(param) {
+        return axios.post('/api/product/signup', param);
+    }
 }
 
 export default new productService();

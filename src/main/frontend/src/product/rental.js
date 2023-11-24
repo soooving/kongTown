@@ -28,6 +28,8 @@ class rental extends Component {
         ProductService.rentalProduct(param).then((res) => {
             if(res.data >= 0) {
                 alert('성공적으로 신청되었습니다 !');
+
+                return window.location.reload();
             }
         });
     }
@@ -68,7 +70,7 @@ class rental extends Component {
                                                     <button type={"button"} className={"btn-save"} onClick={() => this.rental(item.itemCode)}>대여신청</button>
                                                 </div>
                                                 : item.state!==undefined ?
-                                                    (item.state === 'ready' ? '신청심사' : item.state === 'apply' ? '대여승인' : '신청반려')
+                                                    (item.state === 'ready' ? '승인대기' : item.state === 'apply' ? '대여승인' : '신청반려')
                                                     : ''
                                         } </td>
                                     </tr>

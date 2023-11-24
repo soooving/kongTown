@@ -19,5 +19,8 @@ public interface ProductMapper {
 
 
 
+    List<HashMap<String, Object>> productSignupList(HashMap<String, Object> param);
     public int productHaveNumberUpdate(HashMap<String, Object> param);
+
+    public int productSignup(HashMap<String, Object> param);
 }

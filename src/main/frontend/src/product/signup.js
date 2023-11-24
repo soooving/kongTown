@@ -17,17 +17,19 @@ class signup extends Component {
         });
     }
 
-    signup(itemCode){
+    signup(rtCode, state){
+        console.log(state)
         let param = {
-            itemCode: itemCode,
-            rtState: 'ready',
-            rtNumber: 1,
-            returnYn: 'N'
+            rtCode: rtCode,
+            rtState: state
         };
 
         ProductService.signupProduct(param).then((res) => {
             if(res.data >= 0) {
-                alert('성공적으로 신청되었습니다 !');
+                let stateV = state==='apply' ? '승인' : '반려';
+                alert('성공적으로 '+ stateV +'되었습니다 !');
+
+                return window.location.reload();
             }
         });
     }
@@ -44,33 +46,34 @@ class signup extends Component {
                         <thead>
                         <tr>
                             <td>순번</td>
+                            <td>신청코드</td>
                             <td>물품명</td>
-                            <td>잔여/보유수량</td>
-                            <td>상태</td>
-                            <td>신청</td>
+                            <td>신청자명</td>
+                            <td>신청상태</td>
+                            <td>승인/반려</td>
                         </tr>
                         </thead>
                         <tbody>
                         {
                             this.state.products.map(
                                 item =>
-                                    <tr key = {item.itemCode}>
+                                    <tr key = {item.rtCode}>
                                         <td> {item.num} </td>
+                                        <td> {item.rtCode} </td>
                                         <td> {item.itemName} </td>
-                                        <td> {item.haveNumber} / {item.itemNumber} </td>
-                                        <td> {(item.haveNumber!==0 && item.useYn!=='N') ?
-                                            <span>신청가능</span>
-                                            : <span className={"text-red"}>신청불가능</span>
-                                        } </td>
+                                        <td> {item.userId} </td>
                                         <td> {
-                                            (item.haveNumber!==0 && item.useYn!=='N' && item.state===undefined) ?
-                                                <div className={"button-area button-area-td"}>
-                                                    <button type={"button"} className={"btn-save"} onClick={() => this.signup(item.itemCode)}>대여신청</button>
-                                                </div>
-                                            : item.state!==undefined ?
-                                                (item.state === 'ready' ? '신청심사' : item.state === 'apply' ? '대여승인' : '신청반려')
-                                                : ''
+                                            item.state === 'ready' ? '승인대기'
+                                                : item.state === 'apply' ? '대여승인' : '대여반려'
                                         } </td>
+                                        <td>{
+                                            item.state === 'ready' ?
+                                                <div className={"button-area button-area-td"}>
+                                                    <button type={"button"} className={"btn-save"} onClick={() => this.signup(item.rtCode, 'apply')}>승인</button>
+                                                    <button type={"button"} className={"btn-save"} onClick={() => this.signup(item.rtCode, 'cancel')}>반려</button>
+                                                </div>
+                                                : ''
+                                        }</td>
                                     </tr>
                             )
                         }

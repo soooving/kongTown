@@ -37,4 +37,16 @@ public class ProductService {
 
         return productMapper.productRental(param);
     }
+
+    public List<HashMap<String, Object>> productSignupList(HashMap<String, Object> param) {
+        return productMapper.productSignupList(param);
+    }
+
+    public int productSignup(HashMap<String, Object> param) {
+        int res = 0;
+        res += productMapper.productSignup(param);
+        // res += productMapper.productHaveNumberUpdate(param);
+
+        return res;
+    }
 }

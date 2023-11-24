@@ -77,7 +77,7 @@
     </select>
     <insert id="productRental" parameterType="hashmap">
         <selectKey resultType="string" keyProperty="rtCode" order="BEFORE">
-            SELECT NVL(MAX(CAST(item_code AS UNSIGNED))+1, 'R000000001') FROM RENTAL_LOG
+            SELECT NVL(CONCAT('R', LPAD(MAX(CAST(REGEXP_REPLACE(rt_code, '[^0-9]+', '') AS UNSIGNED))+1, 9, '0')), 'R000000001') FROM RENTAL_LOG ORDER BY rt_code DESC LIMIT 1
         </selectKey>
 
         INSERT INTO RENTAL_LOG (
@@ -107,6 +107,27 @@
             , NOW()
         )
     </insert>
+
+
+    <select id="productSignupList" resultType="java.util.HashMap">
+        SELECT
+            row_number() over(order by I.item_code) as num
+             , L.rt_code AS rtCode
+             , I.item_code AS itemCode
+             , I.item_name AS itemName
+             , L.user_id AS userId
+             , L.rt_state AS state
+        FROM RENTAL_LOG L
+        INNER JOIN RENTAL_ITEM I ON I.item_code = L.item_code
+    </select>
+    <update id="productSignup">
+        UPDATE RENTAL_LOG
+        SET rt_state = #{rtState}
+          , mod_id = #{regId}
+          , mod_date = NOW()
+
+        WHERE rt_code =  #{rtCode}
+    </update>
     <update id="productHaveNumberUpdate">
         <selectKey resultType="string" keyProperty="haveNumber" order="BEFORE">
             SELECT CAST(have_number AS UNSIGNED)-1 AS haveNumber FROM RENTAL_ITEM WHERE item_code =  #{itemCode}
